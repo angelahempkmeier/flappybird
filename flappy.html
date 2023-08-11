@@ -3,14 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy Bird</title>
-    <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/flappy.css">
 </head>
 
 <body class="conteudo">
     <h1>Flappy Bird</h1>
+    <div class="player">
+        <span id="score">Score: 0</span>
+        <input type="text" id="nome" placeholder="Insira seu nome">
+        <button onclick="iniciarJogo();">Iniciar Jogo</button>
+        <button style="display: none;" onclick="salvarPontuacao()">Salvar Pontuação</button>
+    </div>
     <div wm-flappy>
+        <img src="imgs/clouds.png" alt="" class="clouds">
+        <img src="imgs/clouds.png" alt="" class="clouds bottom">
         <!-- 
         <img src="./imgs/passaro.png" alt="passaro" class="passaro">
         <div class="par-de-barreiras">
@@ -27,7 +35,7 @@
         <div class="progresso">
             100
         </div>
-         -->
+        -->
     </div>
     <script src="js/flappy.js"></script>
 </body>

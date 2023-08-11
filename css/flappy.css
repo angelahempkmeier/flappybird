@@ -7,15 +7,79 @@
     src: url('../fonts/Pixel.ttf');
 }
 
+body {
+    background-color: antiquewhite;
+}
+
+h1 {
+    color: #87ceeb;
+    text-align: center;
+    font-family: 'Pixel';
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    justify-content: center;
+    background-color: #e0f6ff;
+    padding: 5px;
+    border-radius: 10px;
+    position: absolute;
+    top: 20%;
+    left: 25px;
+}
+
+.player span {
+    color: #87ceeb;
+    font-family: 'Pixel';
+    font-weight: bolder;
+    text-align: center;
+    margin: 5px;
+}
+
+.player  input {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.player button {
+    border: none;
+    background-color: #87ceeb;
+    color: #e0f6ff;
+    border-radius: 10px;
+    margin: 10px;
+    transition: 0.5s;
+}
+
+.player button:hover{
+    background-color: #e0f6ff;
+    color: #87ceeb;
+}
+
 [wm-flappy]{
     position: relative;
-    border: 5px solid dodgerblue;
+    border: 5px solid white;
     height: 700px;
     width: 1200px;
-    margin: 15px;
-    background-color: deepskyblue;
+    margin: 15px auto;
+    background: linear-gradient(#87ceeb, #e0f6ff);
     overflow: hidden;
+    
 
+}
+
+.clouds {
+    position: absolute;
+    width: 550px;
+    animation: clouds-animation 10s infinite linear;
+
+}
+
+.bottom {
+    top: 50%;
+    animation:  bottom-animation 15s infinite linear;
 }
 
 .passaro {
@@ -63,3 +127,33 @@
     z-index: 100;
 }
 
+.clouds-stop {
+    animation-play-state: paused;
+}
+
+@keyframes clouds-animation {
+    from {
+        right: -550px;
+    }
+
+    to {
+        right: 100%;
+    }
+}
+
+@keyframes bottom-animation {
+    from {
+        right: -550px;
+    }
+
+    to {
+        right: 100%;
+    }
+}
+
+@media (min-width: 800px) {
+    [wm-flappy]{
+        width: 1000px;
+        height: 600px;
+    }
+}
