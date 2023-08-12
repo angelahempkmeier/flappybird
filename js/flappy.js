@@ -136,7 +136,6 @@ function colidiu(passaro, barreiras){
 
 function FlappyBird() {
     
-    
     let pontos = 0;
 
     const areaDoJogo = document.querySelector('[wm-flappy');
@@ -162,11 +161,28 @@ function FlappyBird() {
         }, 20);
     }
 
+    this.stop = () => {
+        areaDoJogo.removeChild(progresso.elemento);
+        areaDoJogo.removeChild(passaro.elemento);
+        barreiras.pares.forEach(par  => areaDoJogo.removeChild(par.elemento));
+    }
+
+}
+
+function gameStartScreen(){
+
+
 }
 
 function iniciarJogo(){
-
-     
+    if(flappyBird){
+        stopGame();
+    }
+    
+    flappyBird = new FlappyBird();
+    flappyBird.start();    
 }
 
-new FlappyBird().start();
+function stopGame(){
+    flappyBird.stop();
+}
