@@ -1,4 +1,5 @@
 let flappyBird;
+const tenHigher = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function novoElemento(tagName, className) {
     const elem = document.createElement(tagName);
@@ -169,13 +170,31 @@ function FlappyBird() {
 
 }
 
-function gameStartScreen(){
+function tenHigherPontuation(){
+    const players = document.querySelector('.players');
+    const scoreText = document.querySelector('.progresso').textContent;
+    const score = parseInt(scoreText);
 
+    for(let i = 0; i < 10; i++){
+        if(score > tenHigher[i]){
+            tenHigher.splice(i, 0, score);
+            tenHigher.pop();
+            break;
+        }
+    }
+    players.innerHTML = '';
+
+    tenHigher.forEach(ponto => {
+        const pontoElemento = document.createElement('div');
+        pontoElemento.textContent = `${ponto}`;
+        players.appendChild(pontoElemento);
+    });
 
 }
 
 function iniciarJogo(){
     if(flappyBird){
+        tenHigherPontuation();
         stopGame();
     }
     
