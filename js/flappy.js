@@ -173,20 +173,24 @@ function FlappyBird() {
 function tenHigherPontuation(){
     const players = document.querySelector('.players');
     const scoreText = document.querySelector('.progresso').textContent;
+    let playerName = document.getElementById('nome').value;
     const score = parseInt(scoreText);
 
     for(let i = 0; i < 10; i++){
+        if(playerName == null || playerName == ''){
+            playerName = `player ${i}`;
+        }
         if(score > tenHigher[i]){
-            tenHigher.splice(i, 0, score);
+            tenHigher.splice(i, 0, {playerName, score});
             tenHigher.pop();
             break;
         }
     }
     players.innerHTML = '';
 
-    tenHigher.forEach(ponto => {
+    tenHigher.forEach((entry, index) => {
         const pontoElemento = document.createElement('div');
-        pontoElemento.textContent = `${ponto}`;
+        pontoElemento.textContent = `${index + 1}. ${entry.playerName} - ${entry.score}`;
         players.appendChild(pontoElemento);
     });
 
