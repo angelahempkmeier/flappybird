@@ -1,5 +1,5 @@
 let flappyBird;
-const tenHigher = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const tenHigher = JSON.parse(localStorage.getItem('tenHigher')) || Array.from({ length: 10 }, () => ({ playerName: "", score: 0 }));
 
 function novoElemento(tagName, className) {
     const elem = document.createElement(tagName);
@@ -170,22 +170,37 @@ function FlappyBird() {
 
 }
 
+
+if (tenHigher.length < 10) {
+    const emptyEntries = 10 - tenHigher.length;
+    for (let i = 0; i < emptyEntries; i++) {
+        tenHigher.push({ playerName: "", score: 0 });
+    }
+}
+
 function tenHigherPontuation(){
     const players = document.querySelector('.players');
     const scoreText = document.querySelector('.progresso').textContent;
-    let playerName = document.getElementById('nome').value;
+    const playerName = document.getElementById('nome').value || `Player ${tenHigher.length + 1}`;
+    let inserted = false;
     const score = parseInt(scoreText);
 
-    for(let i = 0; i < 10; i++){
-        if(playerName == null || playerName == ''){
-            playerName = `player ${i}`;
-        }
-        if(score > tenHigher[i]){
+    for(let i = 0; i < tenHigher.length; i++){
+        if(score > tenHigher[i].score){
             tenHigher.splice(i, 0, {playerName, score});
-            tenHigher.pop();
+            inserted = true;
             break;
         }
     }
+
+    if (!inserted && tenHigher.length < 10) {
+        tenHigher.push({playerName, score});
+    }
+
+    if (tenHigher.length > 10) {
+        tenHigher.pop();
+    }
+
     players.innerHTML = '';
 
     tenHigher.forEach((entry, index) => {
@@ -194,9 +209,13 @@ function tenHigherPontuation(){
         players.appendChild(pontoElemento);
     });
 
+    localStorage.setItem('tenHigher', JSON.stringify(tenHigher));
+
+
 }
 
 function iniciarJogo(){
+
     if(flappyBird){
         tenHigherPontuation();
         stopGame();
